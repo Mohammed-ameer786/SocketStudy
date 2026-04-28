@@ -58,20 +58,26 @@ Socket programming finds applications in various domains, including web developm
 import socket
 import threading
 import time 
+
 def server():
-    s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(("127.0.0.1",5000))
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("127.0.0.1", 5000))
     s.listen(1)
-    print("server waiting")
+    print("Server waiting...")
 
-    conn, addr=s.accept()
-    print("connected by :",addr)
-    data=conn.recv(1024)
-    print("client says: ",data.decode())
+    conn, addr = s.accept()
+    print("Connected by:", addr)
 
-    conn.send("hello from server ".encode())
+    for _ in range(3):   # conversation for 3 messages
+        data = conn.recv(1024).decode()
+        print("Client says:", data)
+
+        reply = input("Server reply: ")
+        conn.send(reply.encode())
+
     conn.close()
     s.close()
+
 
 def client():
     time.sleep(1)  # wait for server to start
@@ -79,12 +85,15 @@ def client():
     c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     c.connect(("127.0.0.1", 5000))
 
-    c.send("Hello from client".encode())
+    for _ in range(3):   # conversation for 3 messages
+        msg = input("Client: ")
+        c.send(msg.encode())
 
-    response = c.recv(1024)
-    print("Server says:", response.decode())
+        response = c.recv(1024).decode()
+        print("Server says:", response)
 
     c.close()
+
 
 server_thread = threading.Thread(target=server)
 client_thread = threading.Thread(target=client)
@@ -97,7 +106,8 @@ client_thread.join()
 
 ```
 ## Output:
-<img width="1062" height="883" alt="image" src="https://github.com/user-attachments/assets/d9b63099-a7d6-490f-8b48-e298f7b9eb18" />
+<img width="1063" height="884" alt="Screenshot 2026-04-28 093434" src="https://github.com/user-attachments/assets/52d44034-35b6-4eb1-8b43-c0df3ce43be8" />
+
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
