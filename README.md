@@ -106,8 +106,7 @@ client_thread.join()
 
 ```
 ## Output:
-<img width="1063" height="884" alt="Screenshot 2026-04-28 093434" src="https://github.com/user-attachments/assets/52d44034-35b6-4eb1-8b43-c0df3ce43be8" />
-
+<img width="483" height="257" alt="Screenshot 2026-04-28 095529" src="https://github.com/user-attachments/assets/f24313b2-0268-4836-b870-c72198d85722" />
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
